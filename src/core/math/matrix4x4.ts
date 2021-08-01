@@ -1,5 +1,8 @@
 import Vector3 from "./vector3";
 
+/**
+ * Represents a 4-dimensional square matrix.
+ */
 class Matrix4x4 {
   private _data: number[] = [];
 
@@ -7,10 +10,17 @@ class Matrix4x4 {
     this._data = data;
   }
 
+  /**
+   * Get the matrix elements as an array of numbers.
+   */
   public get data(): number[] {
     return this._data;
   }
 
+  /**
+   * Create an identity matrix.
+   * @returns An idenity matrix.
+   */
   public static identity(): Matrix4x4 {
     // prettier-ignore
     return new Matrix4x4([
@@ -21,6 +31,16 @@ class Matrix4x4 {
     ])
   }
 
+  /**
+   * Create an orthographic projection matrix.
+   * @param left
+   * @param right
+   * @param bottom
+   * @param top
+   * @param near
+   * @param far
+   * @returns An orthographic projection matrix.
+   */
   public static orthographic(
     left: number,
     right: number,
@@ -42,6 +62,9 @@ class Matrix4x4 {
     ])
   }
 
+  /**
+   * Creates a translation matrix.
+   */
   public static translation(p: Vector3): Matrix4x4 {
     // prettier-ignore
     return new Matrix4x4([
