@@ -1,4 +1,3 @@
-import { urlToHttpOptions } from 'url';
 import {gl} from './utils'
 
 type AttributeLocation = number
