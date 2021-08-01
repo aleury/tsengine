@@ -45,16 +45,14 @@ class AssetManager {
     loader.loadAsset(name);
   }
 
-  public static isAssetLoaded(name: string): boolean {
-    return AssetManager._loadedAssets.has(name);
-  }
-
-  public static getAsset(name: string): IAsset {
-    if (!AssetManager.isAssetLoaded(name)) {
-      AssetManager.loadAsset(name);
+  public static getAsset(name: string): IAsset | undefined {
+    if (AssetManager._loadedAssets.has(name)) {
+      return AssetManager._loadedAssets.get(name);
     }
 
-    return AssetManager._loadedAssets.get(name);
+    AssetManager.loadAsset(name);
+
+    return undefined;
   }
 }
 
