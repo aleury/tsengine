@@ -1,13 +1,13 @@
-import TSEngine from './core/engine'
+import TSEngine from "./core/engine";
 
-var engine: TSEngine
+var engine: TSEngine;
 
 // The entrypoint of the application.
 window.onload = () => {
-  engine = new TSEngine()
-  engine.start()
-}
+  engine = new TSEngine();
+  engine.start();
+};
 
 window.onresize = () => {
-  engine.resize()
-}
+  engine.resize();
+};
