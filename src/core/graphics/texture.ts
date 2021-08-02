@@ -121,8 +121,6 @@ class Texture implements IMessageHandler {
 
     this.bind();
 
-    console.log(asset.data);
-
     // prettier-ignore
     gl.texImage2D(gl.TEXTURE_2D, LEVEL, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, asset.data);
 
