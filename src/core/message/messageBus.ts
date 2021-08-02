@@ -51,7 +51,7 @@ class MessageBus {
   }
 
   public static post(message: Message): void {
-    console.log(`Message posted: ${message}`);
+    console.log(`Message posted:`, message);
 
     if (!MessageBus._subscriptions.has(message.code)) {
       return;

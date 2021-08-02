@@ -117,14 +117,35 @@ class Texture implements IMessageHandler {
 
   private loadTextureFromAsset(asset: ImageAsset): void {
     this._width = asset.width;
-    this._handle = asset.height;
+    this._height = asset.height;
 
     this.bind();
+
+    console.log(asset.data);
 
     // prettier-ignore
     gl.texImage2D(gl.TEXTURE_2D, LEVEL, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, asset.data);
 
+    if (this.isPowerOf2()) {
+      gl.generateMipmap(gl.TEXTURE_2D);
+    } else {
+      // do not generate a mip map and clip wrapping to edge.
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    }
+
     this._isLoaded = true;
+  }
+
+  private isPowerOf2(): boolean {
+    return (
+      this.isValuePowerOf2(this._width) && this.isValuePowerOf2(this._height)
+    );
+  }
+
+  private isValuePowerOf2(value: number): boolean {
+    return (value & (value - 1)) === 0;
   }
 }
 
