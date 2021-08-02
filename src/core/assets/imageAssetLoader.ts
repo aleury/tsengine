@@ -2,7 +2,7 @@ import AssetManager from "./assetManager";
 import IAsset from "./IAsset";
 import IAssetLoader from "./IAssetLoader";
 
-class ImageAsset implements IAsset {
+export class ImageAsset implements IAsset {
   public readonly name: string;
   public readonly data: HTMLImageElement;
 

@@ -3,8 +3,7 @@ import IAsset from "./IAsset";
 import IAssetLoader from "./IAssetLoader";
 import ImageAssetLoader from "./imageAssetLoader";
 
-export const MESSAGE_ASSET_LOADER_ASSET_LOADED =
-  "MESSAGE_ASSET_LOADER_ASSET_LOADED";
+const MESSAGE_ASSET_LOADER_ASSET_LOADED = "MESSAGE_ASSET_LOADER_ASSET_LOADED";
 
 class AssetManager {
   private static _loaders: IAssetLoader[] = [];
@@ -20,10 +19,15 @@ class AssetManager {
     AssetManager._loaders.push(loader);
   }
 
+  public static onAssetLoadedMessageCode(assetName: string): string {
+    return `${MESSAGE_ASSET_LOADER_ASSET_LOADED}::${assetName}`;
+  }
+
   public static onAssetLoaded(asset: IAsset): void {
     AssetManager._loadedAssets.set(asset.name, asset);
+
     Message.send(
-      `${MESSAGE_ASSET_LOADER_ASSET_LOADED}::${asset.name}`,
+      AssetManager.onAssetLoadedMessageCode(asset.name),
       AssetManager,
       asset
     );
@@ -45,7 +49,7 @@ class AssetManager {
     loader.loadAsset(name);
   }
 
-  public static getAsset(name: string): IAsset | undefined {
+  public static getAsset(name: string): IAsset {
     if (AssetManager._loadedAssets.has(name)) {
       return AssetManager._loadedAssets.get(name);
     }

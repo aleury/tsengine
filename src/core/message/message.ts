@@ -32,7 +32,7 @@ class Message {
     MessageBus.post(new Message(code, sender, context, MessagePriority.HIGH));
   }
 
-  public static susbscribe(code: string, handler: IMessageHandler): void {
+  public static subscribe(code: string, handler: IMessageHandler): void {
     MessageBus.addSubscription(code, handler);
   }
 
